@@ -1,5 +1,5 @@
 <head>
-  <title>Leaderboard</title>
+  <title>Shared Grocery List</title>
 </head>
 
 <body>
@@ -10,7 +10,7 @@
 </body>
 
 <template name="leaderboard">
-  {{> input}}
+  {{> input_form}}
 
   <h3>Grocery List</h3>
   <div class="leaderboard">
@@ -43,7 +43,7 @@
   </ul>
 </template>
 
-<template name="input">
+<template name="input_form">
   <form>
     <input type="text" placeholder="e.g. Milk" id="name_input" /><br>
     <input type="text" placeholder="details e.g. 1 Gallon - 2%" id="detail_input" /><br>

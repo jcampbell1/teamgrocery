@@ -1,5 +1,5 @@
-// Set up a collection to contain player information. On the server,
-// it is backed by a MongoDB collection named "players".
+// Set up two collections to contain items. On the server,
+// it is backed by MongoDB collections named "toBuy" and "purchased".
 
 ToBuy = new Meteor.Collection("toBuy");
 Purchased = new Meteor.Collection("purchased");
@@ -12,45 +12,35 @@ if (Meteor.isClient) {
     return Purchased.find({});
   };
 
-
-  // Template.leaderboard.events({
-  //   'click input.inc': function () {
-  //     ToBuy.update(Session.get("selected_player"));
-  //   }
-  // });
   Template.toBuy.events({
     'click': function () {
-      var blah = this;
+      Purchased.insert(this);
       ToBuy.remove(this._id);
-      Purchased.insert(blah);
     }
   });
   Template.purchased.events({
     'click': function () {
-      var blah = this;
       ToBuy.insert(this);
       Purchased.remove(this._id);
-
     }
   });
-  Template.input.events({
+  Template.input_form.events({
     'submit': function(e) {
       e.preventDefault();
       
       ToBuy.insert( {
         name: $(e.target).find('#name_input').val(), 
         detail: $(e.target).find('#detail_input').val()
-      } ) ;
-      $(e.target).find('#name_input').focus().val('');
-      detail: $(e.target).find('#detail_input').val('');
-      console.log(this);
-      return false;
+      });
+
+      $(e.target).find('input[type=text]').val('').eq(0).focus();
+
     }
-  })
+  });
   
 }
 
-// On server startup, create some players if the database is empty.
+// On server startup, create some items if the database is empty.
 if (Meteor.isServer) {
   Meteor.startup(function () {
     ToBuy.remove({});
