@@ -1,0 +1,52 @@
+<head>
+  <title>Leaderboard</title>
+</head>
+
+<body>
+  <h1>Our Grocery List</h1>
+  <div id="outer">
+    {{> leaderboard}}
+  </div>
+</body>
+
+<template name="leaderboard">
+  {{> input}}
+
+  <h3>Grocery List</h3>
+  <div class="leaderboard">
+    {{#each toBuy}}
+      {{> toBuy}}
+    {{/each}}
+  </div>
+
+  <h3>Items Purchased</h3>
+  <div class="leaderboard">
+    {{#each purchased}}
+      {{> purchased}}
+    {{/each}}
+  </div>
+</template>
+
+<template name="toBuy">
+  <ul class="toBuy {{selected}}">
+    <li><span class="name">{{name}}</span>
+    <span class="detail">{{detail}}</span></li>
+  </ul>
+</template>
+
+<template name="purchased">
+  <ul class="purchased {{selected}}">
+    <li>
+      <span class="name">{{name}}</span>
+      <span class="detail">{{detail}}</span>
+    </li>
+  </ul>
+</template>
+
+<template name="input">
+  <form>
+    <input type="text" placeholder="e.g. Milk" id="name_input" /><br>
+    <input type="text" placeholder="details e.g. 1 Gallon - 2%" id="detail_input" /><br>
+    <input type="submit" value="Add Item" />
+  </form>
+</template>
